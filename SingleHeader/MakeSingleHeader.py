@@ -132,7 +132,7 @@ class SingleHeader( object ):
 		return f.read()
 
 	def __strip_pragma_once( self, header ):
-		return re.sub( '\\s*#pragma once\s*\\/\\/-*\\n', '', header )
+		return re.sub(r'\\s*#pragma once\s*\\/\\/-*\\n', '', header )
 
 	def __strip_comments( self, header ):
 		return re.sub( '^//.*\\n', '', header, flags = re.MULTILINE )
@@ -148,7 +148,7 @@ class SingleHeader( object ):
 		return self.__process_header( os.path.join( self.__base_path[-1], header_path ) )
 
 	def __process_include_directives( self, header ):
-		return re.sub( '^\\s*#include\\s\\"(?P<HEADER_PATH>\\S*)\\"', self.__substitute_include_directive, header, flags = re.MULTILINE )
+		return re.sub(r'^\\s*#include\\s\\"(?P<HEADER_PATH>\\S*)\\"', self.__substitute_include_directive, header, flags = re.MULTILINE )
 
 	def __process_foundation_directives( self, header ):
 		if header.find("#include <Foundation/Foundation.hpp>") != -1:
